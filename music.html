@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="music.css">
+    <script src="music.js" defer></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="Images/theweekend.jpeg" class="logo" alt="Music World Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search songs or artists..." oninput="searchTracks()">
+        </div>
+        <ul class="sidebar-menu">
+            <li class="nav-item active" data-section="landing"><a href="#" onclick="showSection('landing')">Home</a></li>
+            <li class="nav-item" data-section="favorites"><a href="#" onclick="showSection('favorites')">Favorite</a></li>
+            <li class="nav-item" data-section="new-songs"><a href="#" onclick="showSection('new-songs')">New Song</a></li>
+            <li class="nav-item" data-section="album"> <a href="#" onclick="showSection('album')">Album</a></li>
+            <li class="nav-item" data-section="artist"></i> <a href="#" onclick="showSection('artist')">Artist</a></li>
+            <li class="nav-item" data-section="player"><a href="#" onclick="showSection('player')">Playlist</a></li>
+        </ul>
+        <div class="library-section">
+            <h3>Your Library</h3>
+            <ul>
+                <li><i class="fa-solid fa-book"></i> Playlists (Coming Soon)</li>
+            </ul>
+        </div>
+        <div class="theme-toggle">
+            <i class="fa-solid fa-moon" id="theme-toggle"></i> <a href="#" onclick="toggleTheme()">Theme</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Search Results -->
+        <section id="search-results" class="section">
+            <div class="content">
+                <h2>Search Results</h2>
+                <div id="search-results-tracks" class="track-list"></div>
+            </div>
+        </section>
+
+        <!-- Landing Page -->
+        <section id="landing" class="section active">
+            <div class="hero">
+                <h1 class="animate-text">Welcome to Music World</h1>
+                <p class="animate-text">Discover your favorite tunes with an immersive experience!</p>
+                <button class="cta-button" onclick="showSection('player')">Explore Now</button>
+            </div>
+        </section>
+
+        <!-- Favorites Page -->
+        <section id="favorites" class="section">
+            <div class="content">
+                <h2>Favorite Tracks</h2>
+                <div id="favorites-tracks" class="track-list"></div>
+            </div>
+        </section>
+
+        <!-- New Songs Page -->
+        <section id="new-songs" class="section">
+            <div class="content">
+                <h2>New Songs</h2>
+                <div id="new-songs-tracks" class="track-list"></div>
+            </div>
+        </section>
+
+        <!-- Album Page -->
+        <section id="album" class="section">
+            <div class="content">
+                <h2>Albums</h2>
+                <div id="album-tracks" class="track-list"></div>
+            </div>
+        </section>
+
+        <!-- Artist Page -->
+        <section id="artist" class="section">
+            <div class="content">
+                <h2>Artists</h2>
+                <div id="artist-tracks" class="track-list"></div>
+            </div>
+        </section>
+
+        <!-- Player Section -->
+        <section id="player" class="section">
+            <div class="content">
+                <div class="currently-playing">
+                    <h2>Now Playing</h2>
+                    <div class="current-track">
+                        <div class="track-art"></div>
+                        <div class="track-info">
+                            <div class="track-name">Track Name</div>
+                            <div class="track-artist">Track Artist</div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Playlist</h2>
+                <div id="playlist-tracks" class="track-list"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Spotify-Style Player Bar -->
+    <div class="player-bar">
+        <div class="player-bar-content">
+            <div class="track-info">
+                <div class="track-art"></div>
+                <div class="track-details">
+                    <div class="track-name">Track Name</div>
+                    <div class="track-artist">Track Artist</div>
+                </div>
+                <div class="like-track" onclick="likeTrack()">
+                    <i class="fa-regular fa-heart" title="like"></i>
+                </div>
+            </div>
+            <div class="player-controls">
+                <div class="buttons">
+                    <div class="random-track" onclick="randomTrack()">
+                        <i class="fas fa-random" title="random"></i>
+                    </div>
+                    <div class="prev-track" onclick="prevTrack()">
+                        <i class="fa fa-step-backward"></i>
+                    </div>
+                    <div class="playpause-track" onclick="playpauseTrack()">
+                        <i class="fa fa-play-circle fa-2x"></i>
+                    </div>
+                    <div class="next-track" onclick="nextTrack()">
+                        <i class="fa fa-step-forward"></i>
+                    </div>
+                    <div class="repeat-track" onclick="repeatTrack()">
+                        <i class="fa fa-repeat" title="repeat"></i>
+                    </div>
+                </div>
+                <div class="slider_container">
+                    <div class="current-time">00:00</div>
+                    <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+                    <div class="total-duration">00:00</div>
+                </div>
+            </div>
+            <div class="volume-controls">
+                <i class="fa fa-volume-down"></i>
+                <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
+                <i class="fa fa-volume-up"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
